@@ -30,7 +30,7 @@ else
         Console.WriteLine("Hit or stand? (Hit/H or Stand/S)");
         playerChoice = Console.ReadLine()?.ToLower();
         
-        if(playerChoice =="hit" || playerChoice =="h" && playerScore < 21)
+        if(playerChoice =="hit" || (playerChoice =="h" && playerScore < 21))
         {
             int pulledCard = rand.Next(1,12);
             playerScore += pulledCard;
@@ -66,7 +66,7 @@ if (playerChoice == "stand" || playerChoice =="s" || playerScore == 21)
             }
                 
             
-            if((dealerScore > playerScore) && (dealerScore ==21 || dealerScore <=21))
+            if((dealerScore > playerScore) && dealerScore <=21)
                 {
                     Console.WriteLine($"Dealer Wins with Score {dealerScore}.");
                 }
