@@ -1,27 +1,45 @@
 
 decimal baniCard = 1000m;
-
+string? text;
 int input;
+decimal retragere;
+decimal depunere;
 do
 {
 
-Console.WriteLine("=== SIMPLE ATM ===");
-Console.Write("1. Vezi soldul\n2. Retrage bani\n3. Depune bani\n4. Iesire\nAlege o optiune:");
-    input = int.Parse(Console.ReadLine());
+    Console.WriteLine("=== SIMPLE ATM ===");
+    Console.Write("1. Vezi soldul\n2. Retrage bani\n3. Depune bani\n4. Iesire\nAlege o optiune:");
+    text = Console.ReadLine();
+    if (!int.TryParse(text, out input))
+    {
+        Console.WriteLine("Input invalid.");
+        continue;
+    }
+
+
     if (input == 1)
     {
         Console.WriteLine($"Sold curent: {baniCard} lei.");
-        
+
     }
 
-    else if(input == 2)
+    else if (input == 2)
     {
         Console.WriteLine("Ce suma doresti sa retragi?");
-        decimal retragere = decimal.Parse(Console.ReadLine());
-        if (retragere > baniCard)
+        text = Console.ReadLine();
+        if (!decimal.TryParse(text, out retragere))
+        {
+            Console.WriteLine("Input invalid.");
+            continue;
+        }
+
+        if (retragere <= 0)
+        {
+            Console.WriteLine("Suma invalida.");
+        }
+        else if (retragere > baniCard)
         {
             Console.WriteLine("Fonduri insuficiente!");
-            
         }
         else
         {
@@ -29,28 +47,41 @@ Console.Write("1. Vezi soldul\n2. Retrage bani\n3. Depune bani\n4. Iesire\nAlege
             Console.WriteLine($"Sold nou: {baniCard}");
 
         }
+
     }
-    else if(input == 3)
+    else if (input == 3)
     {
         Console.WriteLine("Ce suma doresti sa depui?");
-        decimal depunere = decimal.Parse(Console.ReadLine());
-        baniCard += depunere;
+        text = Console.ReadLine();
+        if (!decimal.TryParse(text, out depunere))
+        {
+            Console.WriteLine("Input invalid.");
+            continue;
+        }
 
-        Console.WriteLine($"Sold now: {baniCard}");
-        
+        if (depunere <= 0)
+        {
+            Console.WriteLine("Suma invalida.");
+        }
+        else
+        {
+            baniCard += depunere;
+            Console.WriteLine($"Sold nou: {baniCard}");
+        }
+
     }
 
-    else if(input == 4)
+    else if (input == 4)
     {
         Console.WriteLine("Va uram o zi frumoasa! Apasati orice tasta pentru a iesi din aplicatie!");
-        Console.ReadLine();
+        Console.ReadKey();
     }
     else
     {
         Console.WriteLine("Optiune invalida.");
-        
+
     }
-    
+
 } while (input != 4);
 
 
